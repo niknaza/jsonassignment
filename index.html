@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JSON Data</title>
+	<style>
+
+		td, th{
+			align: left;
+			border: 1px, #525151;
+			padding-left: 5px;
+			padding-bottom: 3px;
+			padding-top: 3px;
+			
+		}
+		th {
+			font-weight: bold;
+			background-color: #F4F4F4;
+		}
+		
+		input {
+			border-top: 0;
+			border-left: 0;
+			border-right: 0;
+			border-bottom-color: #807E7E;
+		}
+	</style>
+</head>
+
+<body>
+<h2>JSON Data</h2>
+	
+	<table width="90%" border="1" align="center" cellpadding="0" cellspacing="0">
+		<tr>
+		  <td colspan="5" align="right"> <a href="data.json">Download JSON File</a></td></tr>
+		<tr>
+			<th align="left">Id</th>
+			<th align="left">Type</th>
+			<th align="left">Name</th>
+			<th align="left">Batter</th>
+			<th align="left">Topping</th></tr>
+		<tbody id="tabledata" ></tbody>
+	
+		<!--//Form to add additional Data-->
+		<form name="idata" action="">
+		<td><input type="text" name="Id"></td>
+		<td><input type="text" name="Type"></td>
+		<td><input type="text" name="Name"></td>
+		<td><input type="text" name="Batter"></td>
+		<td><input type="text" name="Topping"></td>
+			</form>
+	</table>
+	<p>Please insert additional data and click enter to save</p>
+	<script type="application/javascript">
+		fetch('./data.json')
+		.then (function(response){
+			return response.json();
+		})
+		.then (function(data){
+			for (var i=0; i<data.length; i++){
+				document.getElementById("tabledata").innerHTML +=
+					"<tr><td>"+data[i].Id 
+					+ "</td><td>" + data[i].Type 
+					+"</td><td>"+ data[i].Name 
+					+"</td><td>"+ data[i].Batter 
+					+"</td><td>"+data[i].Topping
+					+"</td></tr>"
+			}
+			
+		})
+		.catch(function(err){
+			console.log(err);
+		});
+	
+	</script>
+</body>
+</html>
